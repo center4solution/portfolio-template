@@ -1,0 +1,2 @@
+# Shared code/data/content is only ever read by PHP; images are served via the version routers.
+Require all denied

@@ -1,0 +1,55 @@
+Options -Indexes
+RewriteEngine On
+
+# Force non-www (production only)
+RewriteCond %{HTTP_HOST} ^www\.example\.com$ [NC]
+RewriteRule ^(.*)$ https://example.com/$1 [L,R=301]
+
+# Never expose repo files or notes from the root
+RewriteRule (^|/)\.git(/|$) - [F,L]
+RewriteRule ^[^/]+\.md$ - [F,L]
+RewriteRule ^shared(/|$) - [F,L]
+
+# Local preview page listing every version (localhost only, blocked in production)
+RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:[0-9]+)?$ [NC]
+RewriteRule ^versions\.php$ - [L]
+RewriteRule ^versions\.php$ - [F,L]
+
+# ---------------------------------------------------------------------------
+# Minute version switch: the same URL serves a different site version (1-6)
+# every minute: version = (server minute mod 6) + 1. Visitors never see the
+# folder name. Requests already inside /1 ... /6 are left alone (preview, and
+# the css/js that each version pins to its own folder).
+# ---------------------------------------------------------------------------
+
+# Files that belong to one version only, so they never switch mid-visit
+RewriteRule ^(imgs/.*|assets/imgs/.*|sitemap\.xml|robots\.txt|llms\.txt)$ 5/$1 [E=BRS_VERSION:5,L]
+
+RewriteCond %{TIME_MIN} ^(00|06|12|18|24|30|36|42|48|54)$
+RewriteRule ^(?![1-6](?:/|$))(.*)$ 1/$1 [E=BRS_VERSION:1,L]
+
+RewriteCond %{TIME_MIN} ^(01|07|13|19|25|31|37|43|49|55)$
+RewriteRule ^(?![1-6](?:/|$))(.*)$ 2/$1 [E=BRS_VERSION:2,L]
+
+RewriteCond %{TIME_MIN} ^(02|08|14|20|26|32|38|44|50|56)$
+RewriteRule ^(?![1-6](?:/|$))(.*)$ 3/$1 [E=BRS_VERSION:3,L]
+
+RewriteCond %{TIME_MIN} ^(03|09|15|21|27|33|39|45|51|57)$
+RewriteRule ^(?![1-6](?:/|$))(.*)$ 4/$1 [E=BRS_VERSION:4,L]
+
+RewriteCond %{TIME_MIN} ^(04|10|16|22|28|34|40|46|52|58)$
+RewriteRule ^(?![1-6](?:/|$))(.*)$ 5/$1 [E=BRS_VERSION:5,L]
+
+RewriteCond %{TIME_MIN} ^(05|11|17|23|29|35|41|47|53|59)$
+RewriteRule ^(?![1-6](?:/|$))(.*)$ 6/$1 [E=BRS_VERSION:6,L]
+
+# The page HTML changes every minute, so browsers must re-check it every visit
+<IfModule mod_headers.c>
+  <FilesMatch "\.php$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php81 .php .php8 .phtml
+</IfModule>
