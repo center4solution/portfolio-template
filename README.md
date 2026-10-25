@@ -14,6 +14,17 @@ A personal portfolio and blog in plain PHP, with seven different designs that sh
 
 You can run one version on its own, or let the root `.htaccess` rotate between them.
 
+## Screenshots
+
+| | |
+|---|---|
+| **1 · Classic**<br>![Classic theme](screenshots/theme-1.png) | **2 · Dark gradient**<br>![Dark gradient theme](screenshots/theme-2.png) |
+| **3 · The Logbook**<br>![The Logbook theme](screenshots/theme-3.png) | **4 · DEV//OS**<br>![DEV//OS theme](screenshots/theme-4.png) |
+| **5 · Transit Map**<br>![Transit Map theme](screenshots/theme-5.png) | **6 · Chain**<br>![Chain theme](screenshots/theme-6.png) |
+| **7 · Orbit**<br>![Orbit theme](screenshots/theme-7.png) | |
+
+The photos in the screenshots are the included placeholders. Swap in your own under `shared/assets/imgs/`.
+
 ## Requirements
 
 - PHP 8.1 or newer
