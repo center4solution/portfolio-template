@@ -1,6 +1,6 @@
 # Portfolio Template
 
-A personal portfolio and blog in plain PHP, with six different designs that share one set of content. No framework, no build step, no database.
+A personal portfolio and blog in plain PHP, with seven different designs that share one set of content. No framework, no build step, no database.
 
 | Version | Style |
 |---|---|
@@ -10,6 +10,7 @@ A personal portfolio and blog in plain PHP, with six different designs that shar
 | `4/` DEV//OS | Neon terminal |
 | `5/` Transit Map | Metro map, departures board |
 | `6/` Chain | Blockchain explorer, wallet, node map |
+| `7/` Orbit | Space mission control, orrery, star map |
 
 You can run one version on its own, or let the root `.htaccess` rotate between them.
 

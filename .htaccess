@@ -16,32 +16,35 @@ RewriteRule ^versions\.php$ - [L]
 RewriteRule ^versions\.php$ - [F,L]
 
 # ---------------------------------------------------------------------------
-# Minute version switch: the same URL serves a different site version (1-6)
-# every minute: version = (server minute mod 6) + 1. Visitors never see the
-# folder name. Requests already inside /1 ... /6 are left alone (preview, and
+# Minute version switch: the same URL serves a different site version (1-7)
+# every minute: version = (server minute mod 7) + 1. Visitors never see the
+# folder name. Requests already inside /1 ... /7 are left alone (preview, and
 # the css/js that each version pins to its own folder).
 # ---------------------------------------------------------------------------
 
 # Files that belong to one version only, so they never switch mid-visit
 RewriteRule ^(imgs/.*|assets/imgs/.*|sitemap\.xml|robots\.txt|llms\.txt)$ 5/$1 [E=BRS_VERSION:5,L]
 
-RewriteCond %{TIME_MIN} ^(00|06|12|18|24|30|36|42|48|54)$
-RewriteRule ^(?![1-6](?:/|$))(.*)$ 1/$1 [E=BRS_VERSION:1,L]
+RewriteCond %{TIME_MIN} ^(00|07|14|21|28|35|42|49|56)$
+RewriteRule ^(?![1-7](?:/|$))(.*)$ 1/$1 [E=BRS_VERSION:1,L]
 
-RewriteCond %{TIME_MIN} ^(01|07|13|19|25|31|37|43|49|55)$
-RewriteRule ^(?![1-6](?:/|$))(.*)$ 2/$1 [E=BRS_VERSION:2,L]
+RewriteCond %{TIME_MIN} ^(01|08|15|22|29|36|43|50|57)$
+RewriteRule ^(?![1-7](?:/|$))(.*)$ 2/$1 [E=BRS_VERSION:2,L]
 
-RewriteCond %{TIME_MIN} ^(02|08|14|20|26|32|38|44|50|56)$
-RewriteRule ^(?![1-6](?:/|$))(.*)$ 3/$1 [E=BRS_VERSION:3,L]
+RewriteCond %{TIME_MIN} ^(02|09|16|23|30|37|44|51|58)$
+RewriteRule ^(?![1-7](?:/|$))(.*)$ 3/$1 [E=BRS_VERSION:3,L]
 
-RewriteCond %{TIME_MIN} ^(03|09|15|21|27|33|39|45|51|57)$
-RewriteRule ^(?![1-6](?:/|$))(.*)$ 4/$1 [E=BRS_VERSION:4,L]
+RewriteCond %{TIME_MIN} ^(03|10|17|24|31|38|45|52|59)$
+RewriteRule ^(?![1-7](?:/|$))(.*)$ 4/$1 [E=BRS_VERSION:4,L]
 
-RewriteCond %{TIME_MIN} ^(04|10|16|22|28|34|40|46|52|58)$
-RewriteRule ^(?![1-6](?:/|$))(.*)$ 5/$1 [E=BRS_VERSION:5,L]
+RewriteCond %{TIME_MIN} ^(04|11|18|25|32|39|46|53)$
+RewriteRule ^(?![1-7](?:/|$))(.*)$ 5/$1 [E=BRS_VERSION:5,L]
 
-RewriteCond %{TIME_MIN} ^(05|11|17|23|29|35|41|47|53|59)$
-RewriteRule ^(?![1-6](?:/|$))(.*)$ 6/$1 [E=BRS_VERSION:6,L]
+RewriteCond %{TIME_MIN} ^(05|12|19|26|33|40|47|54)$
+RewriteRule ^(?![1-7](?:/|$))(.*)$ 6/$1 [E=BRS_VERSION:6,L]
+
+RewriteCond %{TIME_MIN} ^(06|13|20|27|34|41|48|55)$
+RewriteRule ^(?![1-7](?:/|$))(.*)$ 7/$1 [E=BRS_VERSION:7,L]
 
 # The page HTML changes every minute, so browsers must re-check it every visit
 <IfModule mod_headers.c>

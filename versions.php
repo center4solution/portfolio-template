@@ -6,8 +6,8 @@ if (!in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1'], true)) {
 }
 
 $base = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
-// Same rule as the root .htaccess: (minute mod 6) + 1
-$today = (int) date('i') % 6 + 1;
+// Same rule as the root .htaccess: (minute mod 7) + 1
+$today = (int) date('i') % 7 + 1;
 $versions = [
     1 => ['Classic', 'The original Tailwind site'],
     2 => ['Dark gradient', 'Photo stack, typer, polaroids'],
@@ -15,6 +15,7 @@ $versions = [
     4 => ['DEV//OS', 'Neon terminal style'],
     5 => ['Transit Map', 'Metro map, departures board'],
     6 => ['Chain', 'Blockchain explorer, wallet, node map'],
+    7 => ['Orbit', 'Space mission control, orrery, star map'],
 ];
 $pages = ['' => 'Home', 'blogs' => 'Blogs', 'resume' => 'Resume', 'privacy-policy' => 'Privacy'];
 ?>
